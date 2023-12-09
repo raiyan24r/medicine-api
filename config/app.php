@@ -185,4 +185,6 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'drugs_api' => env('NATIONAL_LIBRARY_OF_MEDICINE_API'),
+
 ];
