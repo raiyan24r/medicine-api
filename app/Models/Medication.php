@@ -21,6 +21,7 @@ class Medication extends Model
         'drug_name',
         'base_names',
         'dosage_forms',
+        'user_id',
     ];
 
     protected $casts = [

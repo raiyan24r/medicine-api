@@ -3,8 +3,13 @@
 namespace App\Providers;
 
 use App\Clients\DrugClient;
+use App\Repositories\MedicationRepository;
 use App\Services\DrugSearchService;
 use App\Services\DrugSearchServiceInterface;
+use App\Services\FormatMedicineApiService;
+use App\Services\FormatMedicineApiServiceInterface;
+use App\Services\UserMedicationService;
+use App\Services\UserMedicationServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,8 +23,21 @@ class AppServiceProvider extends ServiceProvider
             return new DrugClient();
         });
 
+        $this->app->bind(MedicationRepository::class, function ($app) {
+            return new MedicationRepository();
+        });
+
+        $this->app->bind(
+            FormatMedicineApiServiceInterface::class,
+            FormatMedicineApiService::class
+        );
+
         $this->app->bind(DrugSearchServiceInterface::class, function ($app) {
-            return new DrugSearchService($app->make(DrugClient::class));
+            return new DrugSearchService($app->make(DrugClient::class), $app->make(FormatMedicineApiService::class));
+        });
+
+        $this->app->bind(UserMedicationServiceInterface::class, function ($app) {
+            return new UserMedicationService($app->make(DrugClient::class),$app->make(MedicationRepository::class), $app->make(FormatMedicineApiService::class));
         });
     }
 

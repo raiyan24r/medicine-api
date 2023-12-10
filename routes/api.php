@@ -23,11 +23,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::prefix('user-medication')->controller(UserMedicationController::class)->group(function () {
-        Route::post('/add-drug', 'addDrug');
-        Route::delete('/delete-drug/{drugId}', 'delete');
-        Route::get('/drugs', 'getDrugs');
+//    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::prefix('user-medication')->group(function () {
+        Route::controller(UserMedicationController::class)->group(function () {
+            Route::post('/add-drug', 'addDrug');
+            Route::delete('/delete-drug/{rxcui}', 'deleteDrug');
+//        Route::get('/drugs', 'getDrugs');
+        });
     });
 });
 
@@ -37,3 +39,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::get('/search-drug', [DrugController::class, 'search'])->middleware('throttle:20,1');
+
+
+
+
