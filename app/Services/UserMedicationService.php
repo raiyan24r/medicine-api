@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Clients\DrugClient;
+use App\Exceptions\NoRecordsException;
 use App\Exceptions\RxcuiInvalidException;
 use App\Models\User;
 use App\Repositories\MedicationRepository;
@@ -58,6 +59,11 @@ class UserMedicationService implements UserMedicationServiceInterface
 
     public function getAllMedicationsForUser(User $user): array
     {
-        return $this->medicationRepository->getAllMedications($user);
+        $medicationRecords = $this->medicationRepository->getAllMedications($user);
+
+        if (empty($medicationRecords)) {
+            throw new NoRecordsException();
+        }
+        return $medicationRecords;
     }
 }

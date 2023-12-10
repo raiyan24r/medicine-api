@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\NoRecordsException;
 use App\Exceptions\RxcuiInvalidException;
 use App\Http\Requests\AddDrugRequest;
 use App\Http\Requests\DeleteDrugRequest;
@@ -42,7 +43,21 @@ class UserMedicationController extends Controller
             return httpResponse(404, 'RXCUI entered is invalid');
         } catch (Exception $e) {
             dd($e);
-            return httpResponse(400, 'Failed to add medication record');
+            return httpResponse(400, 'Failed to delete medication record');
         }
     }
+
+    public function getDrugs(Request $request)
+    {
+        try{
+            $medications = $this->userMedicationService->getAllMedicationsForUser($request->user());
+            return httpResponse(200, 'All medication records for the user fetched', $medications);
+        } catch (NoRecordsException $exception) {
+            return httpResponse(200, 'No medication record available for the user');
+        } catch (Exception $e) {
+            dd($e);
+            return httpResponse(400, 'Failed to fetch medication records for the user');
+        }
+    }
+
 }

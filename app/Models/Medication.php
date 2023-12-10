@@ -29,6 +29,13 @@ class Medication extends Model
         'dosage_forms' => 'array',
     ];
 
+    protected $hidden = [
+        'deleted_at',
+        'updated_at',
+        'created_at',
+        'user_id',
+    ];
+
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);

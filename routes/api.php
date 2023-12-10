@@ -28,7 +28,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::controller(UserMedicationController::class)->group(function () {
             Route::post('/add-drug', 'addDrug');
             Route::delete('/delete-drug/{rxcui}', 'deleteDrug');
-//        Route::get('/drugs', 'getDrugs');
+            Route::get('/drugs', 'getDrugs');
         });
     });
 });
