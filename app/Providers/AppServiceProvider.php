@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Clients\DrugClient;
+use App\Services\DrugSearchService;
+use App\Services\DrugSearchServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +14,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(DrugClient::class, function ($app) {
+            return new DrugClient();
+        });
+
+        $this->app->bind(DrugSearchServiceInterface::class, function ($app) {
+            return new DrugSearchService($app->make(DrugClient::class));
+        });
     }
 
     /**
@@ -19,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        require_once app_path('/Http/Helpers/HttpResponse.php');
     }
 }
