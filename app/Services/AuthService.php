@@ -48,7 +48,7 @@ class AuthService implements AuthServiceInterface
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
-                'access_token' => $token,
+                'bearer_token' => $token,
             ];
         } else {
             throw new InvalidCredentialsException();

@@ -55,7 +55,7 @@ class AuthServiceTest extends TestCase
 
         $result = $this->authService->loginUser($email, $password);
 
-        $this->assertArrayHasKey('access_token', $result);
+        $this->assertArrayHasKey('bearer_token', $result);
         $this->assertEquals($email, $result['email']);
     }
 

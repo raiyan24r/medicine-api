@@ -25,4 +25,9 @@ class DeleteDrugRequest extends FormRequest
             'rxcui' => 'required|string|exists:medications,rxcui,user_id,'.auth()->user()->id,
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        $this->merge(['rxcui' => $this->route('rxcui')]);
+    }
 }
