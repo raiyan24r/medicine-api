@@ -188,5 +188,4 @@ return [
     'drugs_api' => env('NATIONAL_LIBRARY_OF_MEDICINE_API'),
 
     'cache_expiration' => env('CACHE_EXPIRATION', 10),
-
 ];

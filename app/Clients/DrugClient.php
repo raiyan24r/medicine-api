@@ -19,6 +19,13 @@ class DrugClient
         $this->cacheExpiration = config('app.cache_expiration') * 60;
     }
 
+    /**
+     * Search for drug details by name, utilizing caching for optimization.
+     *
+     * @param string $name The name of the drug for which details are to be retrieved.
+     *
+     * @return array An array containing drug details based on the provided name.
+     */
     public function searchByName(string $name): array
     {
         return Cache::remember($this::DETAILS_CACHE_KEY.$name, $this->cacheExpiration, function () use($name) {
@@ -32,6 +39,13 @@ class DrugClient
         });
     }
 
+    /**
+     * Get history status for a drug based on the provided rxcui, utilizing caching for optimization.
+     *
+     * @param string $rxcui The rxcui (RxNorm Concept Unique Identifier) of the drug.
+     *
+     * @return array An array containing the history status for the drug based on the provided rxcui.
+     */
     public function historyStatusByRxcui(string $rxcui): array
     {
         return Cache::remember($this::HISTORY_STATUS_CACHE_KEY.$rxcui, $this->cacheExpiration, function () use($rxcui) {
