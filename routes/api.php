@@ -33,7 +33,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login');
 });
 
-Route::get('/search-drug', [DrugController::class, 'search'])->middleware('throttle:20,1');
+Route::get('/search-drug', [DrugController::class, 'search'])->middleware('throttle:30,1');
 
 
 

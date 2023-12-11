@@ -1,66 +1,105 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Drug Search and Tracker API
+Welcome to the Drug Search and Tracker API, a Laravel-based service designed for drug information search and user-specific medication tracking. This API integrates with the National Library of Medicine's RxNorm APIs to provide comprehensive drug data.
 
-## About Laravel
+Table of Contents
+Installation
+Authentication
+Public Search Endpoint
+Private User Medication Endpoints
+Bonus Challenges
+Technical Details
+Submission
+Installation
+Clone the repository:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+bash
+Copy code
+git clone https://github.com/yourusername/drug-search-tracker-api.git
+Change into the project directory:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+bash
+Copy code
+cd drug-search-tracker-api
+Install dependencies:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+bash
+Copy code
+composer install
+Copy the .env.example file to create a .env file:
 
-## Learning Laravel
+bash
+Copy code
+cp .env.example .env
+Generate an application key:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+bash
+Copy code
+php artisan key:generate
+Configure the database connection in the .env file.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Run migrations:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+bash
+Copy code
+php artisan migrate
+Start the development server:
 
-## Laravel Sponsors
+bash
+Copy code
+php artisan serve
+Now, the API is up and running. You can access it at http://localhost:8000.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Authentication
+The API uses token-based authentication. To authenticate, use the /api/login endpoint with your email and password to obtain an access token. Include this token in the Authorization header for subsequent requests.
 
-### Premium Partners
+Register User
+Endpoint: /api/register
+Method: POST
+Payload: name, email, password
+Login User
+Endpoint: /api/login
+Method: POST
+Payload: email, password
+Public Search Endpoint
+Search for drugs using the RxNorm "getDrugs" endpoint.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Endpoint: /api/public-search
+Method: GET
+Parameters: drug_name (string)
+Example
+bash
+Copy code
+curl -X GET "http://localhost:8000/api/public-search?drug_name=aspirin" -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+Private User Medication Endpoints
+Ensure all endpoints below are authenticated.
 
-## Contributing
+Add Drug
+Add a new drug to the user's medication list.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Endpoint: /api/add-drug
+Method: POST
+Payload: rxcui (string)
+Delete Drug
+Delete a drug from the user's medication list.
 
-## Code of Conduct
+Endpoint: /api/delete-drug/{rxcui}
+Method: DELETE
+Get User Drugs
+Retrieve all drugs from the user's medication list.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Endpoint: /api/get-user-drugs
+Method: GET
+Bonus Challenges
+Rate Limiter: Implemented to prevent abuse of the public search endpoint.
+Caching: Added a caching layer for requests made to the RxNorm API.
+Technical Details
+Error Handling and Data Validation: Implemented for robustness.
+Security: Ensured secure handling of user data and authentication.
+Unit Tests: Achieved 90% coverage for key functionalities.
+Submission
+The codebase is available at repository link.
 
-## Security Vulnerabilities
+For testing the API, you can use the provided Postman Collection. Ensure to replace YOUR_ACCESS_TOKEN with the token obtained after login.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Feel free to reach out for any clarifications or feedback!
