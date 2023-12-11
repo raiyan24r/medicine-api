@@ -14,8 +14,15 @@ class AuthController extends Controller
 {
     public function __construct(private readonly AuthServiceInterface $authService)
     {
-
     }
+
+    /**
+     * Register a new user.
+     *
+     * @param RegisterUserRequest $request The request containing user registration details.
+     *
+     * @return JsonResponse The JSON response indicating the success or failure of the registration process.
+     */
     public function register(RegisterUserRequest $request): JsonResponse
     {
         try {
@@ -26,6 +33,14 @@ class AuthController extends Controller
         }
     }
 
+
+    /**
+     * Log in a user with the provided credentials.
+     *
+     * @param LoginRequest $request The request containing user login details.
+     *
+     * @return JsonResponse The JSON response indicating the success or failure of the login process.
+     */
     public function login(LoginRequest $request): JsonResponse
     {
         try {

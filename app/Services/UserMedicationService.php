@@ -18,7 +18,14 @@ class UserMedicationService implements UserMedicationServiceInterface
     }
 
     /**
-     * @throws RxcuiInvalidException
+     * Add medication for a specific user based on the provided rxcui.
+     *
+     * @param User $user The user for whom the medication is being added.
+     * @param mixed $rxcui The rxcui (RxNorm Concept Unique Identifier) of the medication.
+     *
+     * @throws RxcuiInvalidException If the provided rxcui is not active.
+     *
+     * @return void
      */
     public function addMedicationForUser(User $user, $rxcui): void
     {
@@ -43,7 +50,14 @@ class UserMedicationService implements UserMedicationServiceInterface
     }
 
     /**
-     * @throws RxcuiInvalidException
+     * Delete medication for a specific user based on the provided rxcui.
+     *
+     * @param User $user The user for whom the medication is being deleted.
+     * @param mixed $rxcui The rxcui (RxNorm Concept Unique Identifier) of the medication.
+     *
+     * @throws RxcuiInvalidException If the provided rxcui is not active.
+     *
+     * @return void
      */
     public function deleteMedicationForUser(User $user, $rxcui): void
     {
@@ -57,6 +71,15 @@ class UserMedicationService implements UserMedicationServiceInterface
         $this->medicationRepository->deleteMedication($user->id, $rxcui);
     }
 
+    /**
+     * Get all medication records for a specific user.
+     *
+     * @param User $user The user for whom the medication records are being retrieved.
+     *
+     * @throws NoRecordsException If no medication records are found for the user.
+     *
+     * @return array An array containing medication records for the user.
+     */
     public function getAllMedicationsForUser(User $user): array
     {
         $medicationRecords = $this->medicationRepository->getAllMedications($user);

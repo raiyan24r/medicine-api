@@ -18,6 +18,13 @@ class UserMedicationController extends Controller
     {
     }
 
+    /**
+     * Add a medication record for the user based on the provided RXCUI.
+     *
+     * @param AddDrugRequest $request The request containing the RXCUI.
+     *
+     * @return JsonResponse The JSON response indicating the result of the operation.
+     */
     public function addDrug(AddDrugRequest $request): JsonResponse
     {
         try{
@@ -31,6 +38,13 @@ class UserMedicationController extends Controller
         }
     }
 
+    /**
+     * Delete a medication record for the user based on the provided RXCUI.
+     *
+     * @param DeleteDrugRequest $request The request containing the RXCUI as a route parameter.
+     *
+     * @return JsonResponse The JSON response indicating the result of the deletion operation.
+     */
     public function deleteDrug(DeleteDrugRequest $request): JsonResponse
     {
         try{
@@ -44,6 +58,13 @@ class UserMedicationController extends Controller
         }
     }
 
+    /**
+     * Get all medication records for the user.
+     *
+     * @param Request $request The request object.
+     *
+     * @return JsonResponse The JSON response containing medication records for the user, if available.
+     */
     public function getDrugs(Request $request): JsonResponse
     {
         try{

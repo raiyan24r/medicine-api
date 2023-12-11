@@ -10,5 +10,5 @@ interface AuthServiceInterface
     /**
      * @throws InvalidCredentialsException
      */
-    public function loginUser(string $email, string $password);
+    public function loginUser(string $email, string $password): array;
 }

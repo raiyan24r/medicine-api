@@ -3,5 +3,5 @@
 namespace App\Services;
 interface DrugSearchServiceInterface
 {
-    public function drugDetails(string $name);
+    public function drugDetails(string $name): array;
 }
