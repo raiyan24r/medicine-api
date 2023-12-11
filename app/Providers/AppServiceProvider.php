@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use App\Clients\DrugClient;
 use App\Repositories\MedicationRepository;
+use App\Repositories\UserRepository;
+use App\Services\AuthService;
+use App\Services\AuthServiceInterface;
 use App\Services\DrugSearchService;
 use App\Services\DrugSearchServiceInterface;
 use App\Services\FormatMedicineApiService;
@@ -25,6 +28,14 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(MedicationRepository::class, function ($app) {
             return new MedicationRepository();
+        });
+
+        $this->app->bind(UserRepository::class, function ($app) {
+            return new UserRepository();
+        });
+
+        $this->app->bind(AuthServiceInterface::class, function ($app) {
+            return new AuthService($app->make(UserRepository::class));
         });
 
         $this->app->bind(

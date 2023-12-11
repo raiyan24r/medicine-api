@@ -2,52 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Exceptions\InvalidCredentialsException;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterUserRequest;
+use App\Services\AuthServiceInterface;
+use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use function App\Http\Helpers\httpResponse;
 
 class AuthController extends Controller
 {
-    public function register(Request $request): JsonResponse
+    public function __construct(private readonly AuthServiceInterface $authService)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users|max:255',
-            'password' => 'required|string|min:8',
-        ]);
 
-        $user = new User([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-        ]);
-
-        $user->save();
-
-        return response()->json(['message' => 'User registered successfully'], 201);
+    }
+    public function register(RegisterUserRequest $request): JsonResponse
+    {
+        try {
+            $this->authService->registerNewUser($request->input('name'), $request->input('email'), $request->input('password'));
+            return httpResponse(200, 'Successfully registered new user');
+        } catch (Exception $e) {
+            return httpResponse(500, 'Failed to register new user');
+        }
     }
 
-    public function login(Request $request): JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
-
-        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
-            $user = Auth::user();
-            $token = $user->createToken('authToken')->plainTextToken;
-
-            return response()->json([
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-                'access_token' => $token,
-            ], 200);
-        } else {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+        try {
+            $response = $this->authService->loginUser($request->input('email'), $request->input('password'));
+            return httpResponse(200, "Successfully logged in", $response);
+        } catch (InvalidCredentialsException $e) {
+            return httpResponse(401, "Invalid credentials");
+        } catch (Exception $e) {
+            return httpResponse(500, "Failed to login");
         }
     }
 }
