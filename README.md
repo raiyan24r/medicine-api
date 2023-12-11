@@ -1,105 +1,69 @@
 
-Drug Search and Tracker API
+# Drug Search and Tracker API
+
 Welcome to the Drug Search and Tracker API, a Laravel-based service designed for drug information search and user-specific medication tracking. This API integrates with the National Library of Medicine's RxNorm APIs to provide comprehensive drug data.
 
-Table of Contents
-Installation
-Authentication
-Public Search Endpoint
-Private User Medication Endpoints
-Bonus Challenges
-Technical Details
-Submission
-Installation
-Clone the repository:
+## Table of Contents
 
-bash
-Copy code
-git clone https://github.com/yourusername/drug-search-tracker-api.git
-Change into the project directory:
+1. [Installation](#installation)
+2. [Test](#test)
+3. [Authentication](#authentication)
+4. [Postman](#postman)
+5. [Bonus Challenges](#bonus-challenges)
 
-bash
-Copy code
-cd drug-search-tracker-api
-Install dependencies:
+## Installation
 
-bash
-Copy code
-composer install
-Copy the .env.example file to create a .env file:
+1. **Clone the repository:**
+   ``` git clone https://github.com/raiyan24r/medicine-api ```
 
-bash
-Copy code
-cp .env.example .env
-Generate an application key:
+2. **Change into the project directory**
+   ``` cd medicine-api ```
 
-bash
-Copy code
-php artisan key:generate
-Configure the database connection in the .env file.
+3. **Install dependencies:**
+   ``` composer install ```
 
-Run migrations:
+4. **Copy the .env.example file to create a .env file:**
+   ``` cp .env.example .env ```
 
-bash
-Copy code
-php artisan migrate
-Start the development server:
+5. **Configure the database connection in the .env file.**
 
-bash
-Copy code
-php artisan serve
-Now, the API is up and running. You can access it at http://localhost:8000.
+6. **Run migrations:**
+   ``` php artisan migrate ```
 
-Authentication
-The API uses token-based authentication. To authenticate, use the /api/login endpoint with your email and password to obtain an access token. Include this token in the Authorization header for subsequent requests.
+7. **Start the development server:**
+   ``` php artisan serve ```
 
-Register User
-Endpoint: /api/register
-Method: POST
-Payload: name, email, password
-Login User
-Endpoint: /api/login
-Method: POST
-Payload: email, password
-Public Search Endpoint
-Search for drugs using the RxNorm "getDrugs" endpoint.
+Now, the API is up and running. You can access it at `http://localhost:8000`
+## Test
 
-Endpoint: /api/public-search
-Method: GET
-Parameters: drug_name (string)
-Example
-bash
-Copy code
-curl -X GET "http://localhost:8000/api/public-search?drug_name=aspirin" -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
-Private User Medication Endpoints
-Ensure all endpoints below are authenticated.
+Run the command ``` php artisan test ``` to run all the tests in the project.
+The project has a total of 12 tests with 25 assertions
 
-Add Drug
-Add a new drug to the user's medication list.
+## Authentication
 
-Endpoint: /api/add-drug
-Method: POST
-Payload: rxcui (string)
-Delete Drug
-Delete a drug from the user's medication list.
+To register, use the `/api/register` endpoint with name, email and password.
+The API uses token-based authentication. To authenticate, use the `/api/login` endpoint with your email and password to obtain an access token. Include this token in the Authorization header for subsequent requests.
 
-Endpoint: /api/delete-drug/{rxcui}
-Method: DELETE
-Get User Drugs
-Retrieve all drugs from the user's medication list.
+## Postman
 
-Endpoint: /api/get-user-drugs
-Method: GET
-Bonus Challenges
-Rate Limiter: Implemented to prevent abuse of the public search endpoint.
-Caching: Added a caching layer for requests made to the RxNorm API.
-Technical Details
-Error Handling and Data Validation: Implemented for robustness.
-Security: Ensured secure handling of user data and authentication.
-Unit Tests: Achieved 90% coverage for key functionalities.
-Submission
-The codebase is available at repository link.
+The postman link is here https://api.postman.com/collections/29698203-8f208111-7d54-4cce-b634-00cace511504?access_key={key_provided_in_email}
 
-For testing the API, you can use the provided Postman Collection. Ensure to replace YOUR_ACCESS_TOKEN with the token obtained after login.
+The public documentation link is also attached
+https://documenter.getpostman.com/view/29698203/2s9Ykhi5K7
 
-Feel free to reach out for any clarifications or feedback!
+``{{url}}`` in the all postman requests all have suffix `/api` So the url is actually `http://localhost:8000/api`
+
+Response examples have also been added to to each request
+
+## Bonus Challenges
+
+#### Rate Limiter
+Rate limiter has been implemented for the public search endpoint. A maximum of 30 requests can be made in 1 minute using the public search endpoint.
+
+#### Caching
+The response from the requests made to the RxNorm API are being cached. The cache expiration time can be modified by setting the value of the .env variable `CACHE_EXPIRATION`
+By default the cache expiration time is 10 minutes which can be increased or decreased as required.
+
+
+
+
