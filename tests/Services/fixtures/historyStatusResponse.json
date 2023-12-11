@@ -1,0 +1,68 @@
+{
+    "rxcuiStatusHistory": {
+        "metaData": {
+            "status": "Active",
+            "source": "RXNORM",
+            "releaseStartDate": "042005",
+            "releaseEndDate": "",
+            "isCurrent": "YES",
+            "activeStartDate": "042005",
+            "activeEndDate": "",
+            "remappedDate": ""
+        },
+        "attributes": {
+            "rxcui": "105260",
+            "name": "azithromycin 40 MG/ML Oral Suspension [Zithromax]",
+            "tty": "SBD",
+            "isMultipleIngredient": "NO",
+            "isBranded": "YES"
+        },
+        "definitionalFeatures": {
+            "ingredientAndStrength": [
+                {
+                    "baseRxcui": "18631",
+                    "baseName": "azithromycin",
+                    "bossRxcui": "18631",
+                    "bossName": "azithromycin",
+                    "activeIngredientRxcui": "18631",
+                    "activeIngredientName": "azithromycin",
+                    "moietyRxcui": "18631",
+                    "moietyName": "azithromycin",
+                    "numeratorValue": "40",
+                    "numeratorUnit": "MG",
+                    "denominatorValue": "1",
+                    "denominatorUnit": "ML"
+                }
+            ],
+            "doseFormConcept": [
+                {
+                    "doseFormRxcui": "316969",
+                    "doseFormName": "Oral Suspension"
+                }
+            ],
+            "doseFormGroupConcept": [
+                {
+                    "doseFormGroupRxcui": "1151131",
+                    "doseFormGroupName": "Oral Product"
+                },
+                {
+                    "doseFormGroupRxcui": "1151137",
+                    "doseFormGroupName": "Oral Liquid Product"
+                }
+            ]
+        },
+        "pack": {},
+        "derivedConcepts": {
+            "ingredientConcept": [
+                {
+                    "ingredientRxcui": "18631",
+                    "ingredientName": "azithromycin"
+                }
+            ],
+            "scdConcept": {
+                "scdConceptRxcui": "141963",
+                "scdConceptName": "azithromycin 40 MG/ML Oral Suspension"
+            }
+        }
+    }
+}

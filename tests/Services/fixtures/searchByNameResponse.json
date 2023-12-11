@@ -1,0 +1,44 @@
+{
+    "drugGroup": {
+        "name": null,
+        "conceptGroup": [
+            {
+                "tty": "BPCK",
+                "conceptProperties": [
+                    {
+                        "rxcui": "750149",
+                        "name": "{6 (azithromycin 250 MG Oral Tablet [Zithromax]) } Pack [Z-PAK]",
+                        "synonym": "Z-PAK",
+                        "tty": "BPCK",
+                        "language": "ENG",
+                        "suppress": "N",
+                        "umlscui": ""
+                    },
+                    {
+                        "rxcui": "750157",
+                        "name": "{3 (azithromycin 500 MG Oral Tablet [Zithromax]) } Pack [TRI-PAK]",
+                        "synonym": "TRI-PAK",
+                        "tty": "BPCK",
+                        "language": "ENG",
+                        "suppress": "N",
+                        "umlscui": ""
+                    }
+                ]
+            },
+            {
+                "tty": "SBD",
+                "conceptProperties": [
+                    {
+                        "rxcui": "105260",
+                        "name": "azithromycin 40 MG/ML Oral Suspension [Zithromax]",
+                        "synonym": "Zithromax 40 MG/ML Oral Suspension",
+                        "tty": "SBD",
+                        "language": "ENG",
+                        "suppress": "N",
+                        "umlscui": ""
+                    }
+                ]
+            }
+        ]
+    }
+}
