@@ -1,7 +1,7 @@
 
-# Drug Search and Tracker API
+# Medicine Search and Tracker API
 
-Welcome to the Drug Search and Tracker API, a Laravel-based service designed for drug information search and user-specific medication tracking. This API integrates with the National Library of Medicine's RxNorm APIs to provide comprehensive drug data.
+Welcome to the Medicine Search and Tracker API, a Laravel-based service designed for drug information search and user-specific medication tracking. This API integrates with the National Library of Medicine's RxNorm APIs to provide comprehensive drug data.
 
 ## Table of Contents
 
