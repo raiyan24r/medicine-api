@@ -46,7 +46,7 @@ The API uses token-based authentication. To authenticate, use the `/api/login` e
 
 ## Postman
 
-The postman link is here https://api.postman.com/collections/29698203-8f208111-7d54-4cce-b634-00cace511504?access_key={key_provided_in_email}
+The postman link is here https://api.postman.com/collections/29698203-8f208111-7d54-4cce-b634-00cace511504?access_key={request_for_access_key}
 
 The public documentation link is also attached
 https://documenter.getpostman.com/view/29698203/2s9Ykhi5K7
