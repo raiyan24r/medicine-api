@@ -3,6 +3,26 @@
 
 Welcome to the Medicine Search and Tracker API, a Laravel-based service designed for drug information search and user-specific medication tracking. This API integrates with the National Library of Medicine's RxNorm APIs to provide comprehensive drug data.
 
+## About
+
+The Medicine Search and Tracker API is a RESTful web service that enables users to search for drug information and manage their personal medication lists. Built with Laravel 10 and PHP 8.1+, it leverages the RxNorm database from the National Library of Medicine to provide accurate and up-to-date drug information including drug names, base names, and dose form details.
+
+### Key Features
+
+- **Drug Search**: Search for medications by name using the RxNorm API integration
+- **User Authentication**: Secure token-based authentication using Laravel Sanctum
+- **Medication Tracking**: Personal medication list management for authenticated users
+- **Rate Limiting**: Public endpoints are rate-limited to prevent abuse (30 requests/minute)
+- **Response Caching**: Configurable caching for RxNorm API responses to improve performance
+
+### Technology Stack
+
+- **Framework**: Laravel 10
+- **Language**: PHP 8.1+
+- **Authentication**: Laravel Sanctum
+- **External API**: National Library of Medicine RxNorm APIs
+- **Testing**: PHPUnit
+
 ## Table of Contents
 
 1. [Installation](#installation)
